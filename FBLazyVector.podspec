@@ -25,8 +25,9 @@ Pod::Spec.new do |s|
   s.author                 = "Facebook, Inc. and its affiliates"
   s.platforms              = { :ios => "9.0", :tvos => "9.2" }
   s.source                 = source
-  s.source_files           = "node_modules/react-native/Libraries/FBLazyVector/**/*.{c,h,m,mm,cpp}"
-  s.header_dir             = "FBLazyVector"
+
+  base_dir = "node_modules/react-native/Libraries/FBLazyVector/"
+  s.source_files           = base_dir + "**/*.{c,h,m,mm,cpp}"
+  s.header_dir             = base_dir + "*.h"
 
 end
-FBLazyVector.podspec
