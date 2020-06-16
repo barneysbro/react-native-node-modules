@@ -37,7 +37,9 @@ Pod::Spec.new do |s|
   s.author                 = "Facebook, Inc. and its affiliates"
   s.platforms              = { :ios => "9.0", :tvos => "9.2" }
   s.source                 = source
-  s.preserve_paths         = "package.json", "LICENSE", "LICENSE-docs"
+
+  base_dir = "node_modules/react-native/"
+  s.preserve_paths         = base_dir + "package.json", base_dir + "LICENSE", base_dir + "LICENSE-docs"
   s.cocoapods_version      = ">= 1.2.0"
 
   s.dependency "React-Core", version

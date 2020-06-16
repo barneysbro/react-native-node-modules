@@ -5,8 +5,7 @@
 
 require "json"
 
-package = JSON.parse(File.read(File.join(__dir__, "package.json")))
-version = package['version']
+version = "0.62.2"
 
 source = { :git => 'https://github.com/facebook/react-native.git' }
 if version == '1000.0.0'
@@ -20,19 +19,21 @@ folly_compiler_flags = '-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 
 folly_version = '2018.10.22.00'
 boost_compiler_flags = '-Wno-documentation'
 
+base_dir = "node_modules/react-native/"
+
 header_subspecs = {
-  'ARTHeaders'                  => 'Libraries/ART/**/*.h',
-  'CoreModulesHeaders'          => 'React/CoreModules/**/*.h',
-  'RCTActionSheetHeaders'       => 'Libraries/ActionSheetIOS/*.h',
-  'RCTAnimationHeaders'         => 'Libraries/NativeAnimation/{Drivers/*,Nodes/*,*}.{h}',
-  'RCTBlobHeaders'              => 'Libraries/Blob/{RCTBlobManager,RCTFileReaderModule}.h',
-  'RCTImageHeaders'             => 'Libraries/Image/*.h',
-  'RCTLinkingHeaders'           => 'Libraries/LinkingIOS/*.h',
-  'RCTNetworkHeaders'           => 'Libraries/Network/*.h',
-  'RCTPushNotificationHeaders'  => 'Libraries/PushNotificationIOS/*.h',
-  'RCTSettingsHeaders'          => 'Libraries/Settings/*.h',
-  'RCTTextHeaders'              => 'Libraries/Text/**/*.h',
-  'RCTVibrationHeaders'         => 'Libraries/Vibration/*.h',
+  'ARTHeaders'                  => base_dir + 'Libraries/ART/**/*.h',
+  'CoreModulesHeaders'          => base_dir + 'React/CoreModules/**/*.h',
+  'RCTActionSheetHeaders'       => base_dir + 'Libraries/ActionSheetIOS/*.h',
+  'RCTAnimationHeaders'         => base_dir + 'Libraries/NativeAnimation/{Drivers/*,Nodes/*,*}.{h}',
+  'RCTBlobHeaders'              => base_dir + 'Libraries/Blob/{RCTBlobManager,RCTFileReaderModule}.h',
+  'RCTImageHeaders'             => base_dir + 'Libraries/Image/*.h',
+  'RCTLinkingHeaders'           => base_dir + 'Libraries/LinkingIOS/*.h',
+  'RCTNetworkHeaders'           => base_dir + 'Libraries/Network/*.h',
+  'RCTPushNotificationHeaders'  => base_dir + 'Libraries/PushNotificationIOS/*.h',
+  'RCTSettingsHeaders'          => base_dir + 'Libraries/Settings/*.h',
+  'RCTTextHeaders'              => base_dir + 'Libraries/Text/**/*.h',
+  'RCTVibrationHeaders'         => base_dir + 'Libraries/Vibration/*.h',
 }
 
 Pod::Spec.new do |s|
@@ -40,7 +41,7 @@ Pod::Spec.new do |s|
   s.version                = version
   s.summary                = "The core of React Native."
   s.homepage               = "http://facebook.github.io/react-native/"
-  s.license                = package["license"]
+  s.license                = "MIT"
   s.author                 = "Facebook, Inc. and its affiliates"
   s.platforms              = { :ios => "9.0", :tvos => "9.2" }
   s.source                 = source
@@ -53,24 +54,24 @@ Pod::Spec.new do |s|
   s.default_subspec        = "Default"
 
   s.subspec "Default" do |ss|
-    ss.source_files           = "React/**/*.{c,h,m,mm,S,cpp}"
-    ss.exclude_files          = "React/CoreModules/**/*",
-                                "React/DevSupport/**/*",
-                                "React/Fabric/**/*",
-                                "React/Inspector/**/*"
-    ss.ios.exclude_files      = "React/**/RCTTV*.*"
-    ss.tvos.exclude_files     = "React/Modules/RCTClipboard*",
-                                "React/Views/RCTDatePicker*",
-                                "React/Views/RCTPicker*",
-                                "React/Views/RCTRefreshControl*",
-                                "React/Views/RCTSlider*",
-                                "React/Views/RCTSwitch*",
-    ss.private_header_files   = "React/Cxx*/*.h"
+    ss.source_files           = base_dir + "React/**/*.{c,h,m,mm,S,cpp}"
+    ss.exclude_files          = base_dir + "React/CoreModules/**/*",
+                                base_dir + "React/DevSupport/**/*",
+                                base_dir + "React/Fabric/**/*",
+                                base_dir + "React/Inspector/**/*"
+    ss.ios.exclude_files      = base_dir + "React/**/RCTTV*.*"
+    ss.tvos.exclude_files     = base_dir + "React/Modules/RCTClipboard*",
+                                base_dir + "React/Views/RCTDatePicker*",
+                                base_dir + "React/Views/RCTPicker*",
+                                base_dir + "React/Views/RCTRefreshControl*",
+                                base_dir + "React/Views/RCTSlider*",
+                                base_dir + "React/Views/RCTSwitch*",
+    ss.private_header_files   = base_dir + "React/Cxx*/*.h"
   end
 
   s.subspec "DevSupport" do |ss|
-    ss.source_files = "React/DevSupport/*.{h,mm,m}",
-                      "React/Inspector/*.{h,mm,m}"
+    ss.source_files = base_dir + "React/DevSupport/*.{h,mm,m}",
+                      base_dir + "React/Inspector/*.{h,mm,m}"
 
     ss.dependency "React-Core/Default", version
     ss.dependency "React-Core/RCTWebSocket", version
@@ -78,7 +79,7 @@ Pod::Spec.new do |s|
   end
 
   s.subspec "RCTWebSocket" do |ss|
-    ss.source_files = "Libraries/WebSocket/*.{h,m}"
+    ss.source_files = base_dir + "Libraries/WebSocket/*.{h,m}"
     ss.dependency "React-Core/Default", version
   end
 
