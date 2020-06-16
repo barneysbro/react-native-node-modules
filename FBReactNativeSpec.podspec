@@ -15,18 +15,34 @@ else
   source[:tag] = "v#{version}"
 end
 
+folly_compiler_flags = '-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1 -Wno-comma -Wno-shorten-64-to-32'
+folly_version = '2018.10.22.00'
+
 Pod::Spec.new do |s|
-  s.name                   = "FBLazyVector"
+  s.name                   = "FBReactNativeSpec"
   s.version                = version
   s.summary                = "-"  # TODO
   s.homepage               = "http://facebook.github.io/react-native/"
   s.license                = "MIT"
   s.author                 = "Facebook, Inc. and its affiliates"
   s.platforms              = { :ios => "9.0", :tvos => "9.2" }
+  s.compiler_flags         = folly_compiler_flags + ' -Wno-nullability-completeness'
   s.source                 = source
 
-  base_dir = "node_modules/react-native/Libraries/FBLazyVector/"
+  base_dir = "node_modules/react-native/Libraries/FBReactNativeSpec/"
   s.source_files           = base_dir + "**/*.{c,h,m,mm,cpp}"
   s.header_dir             = base_dir
 
+  s.pod_target_xcconfig    = {
+                               "USE_HEADERMAP" => "YES",
+                               "CLANG_CXX_LANGUAGE_STANDARD" => "c++14",
+                               "HEADER_SEARCH_PATHS" => "\"$(PODS_TARGET_SRCROOT)/Libraries/FBReactNativeSpec\" \"$(PODS_ROOT)/Folly\""
+                             }
+
+  s.dependency "Folly", folly_version
+  s.dependency "RCTRequired", version
+  s.dependency "RCTTypeSafety", version
+  s.dependency "React-Core", version
+  s.dependency "React-jsi", version
+  s.dependency "ReactCommon/turbomodule/core", version
 end
