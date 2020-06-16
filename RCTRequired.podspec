@@ -27,5 +27,5 @@ Pod::Spec.new do |s|
 
   base_dir = "node_modules/react-native/Libraries/RCTRequired/"
   s.source_files           = base_dir + "**/*.{c,h,m,mm,cpp}"
-  s.header_dir             = "RCTRequired"
+  s.header_dir             = base_dir + "RCTRequired"
 end
