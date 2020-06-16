@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
 
   base_dir = "node_modules/react-native/Libraries/TypeSafety/"
   s.source_files           = base_dir + "**/*.{c,h,m,mm,cpp}"
-  s.header_dir             = "RCTTypeSafety"
+  s.header_dir             = base_dir + "RCTTypeSafety"
   s.pod_target_xcconfig    = {
                                "USE_HEADERMAP" => "YES",
                                "CLANG_CXX_LANGUAGE_STANDARD" => "c++14",
