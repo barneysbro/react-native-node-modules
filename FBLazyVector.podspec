@@ -5,8 +5,7 @@
 
 require "json"
 
-package = JSON.parse(File.read(File.join(__dir__, "..", "..", "package.json")))
-version = package['version']
+version = "0.62.2"
 
 source = { :git => 'https://github.com/facebook/react-native.git' }
 if version == '1000.0.0'
@@ -21,7 +20,7 @@ Pod::Spec.new do |s|
   s.version                = version
   s.summary                = "-"  # TODO
   s.homepage               = "http://facebook.github.io/react-native/"
-  s.license                = package["license"]
+  s.license                = "MIT"
   s.author                 = "Facebook, Inc. and its affiliates"
   s.platforms              = { :ios => "9.0", :tvos => "9.2" }
   s.source                 = source
