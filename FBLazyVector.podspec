@@ -27,6 +27,6 @@ Pod::Spec.new do |s|
 
   base_dir = "node_modules/react-native/Libraries/FBLazyVector/"
   s.source_files           = base_dir + "**/*.{c,h,m,mm,cpp}"
-  s.header_dir             = base_dir
+  s.header_dir             = "FBLazyVector"
 
 end
